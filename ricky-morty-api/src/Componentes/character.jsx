@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
+import { useCharacter } from "../hooks/useCharacter";
 
 export function Character() {
-  const [character, setCharacter] = useState([]);
+  const { getAllCharacters, allCharacters } = useCharacter();
 
   const name = "";
 
   //useEffect y useState Hooks
   useEffect(() => {
-    fetch("https://rickandmortyapi.com/api/character")
-      .then((response) => response.json())
-      .then((data) => setCharacter(data.results));
+    getAllCharacters();
   }, []);
+
   //userEffect recibe una funcion claback, es decir el codigo al ejecutar
   //recibe cuando va  a ejecutar.
   return (
     <ul>
-      {character.map((item, index) => (
+      {allCharacters.map((item, index) => (
         <li key={index}>
           <h3>{item.name}</h3>
           <p>{item.status}</p>
